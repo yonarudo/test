@@ -1,0 +1,98 @@
+Microsoft Windows [Version 10.0.19043.1165]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Owner>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 15
+Server version: 10.4.20-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database coachtest;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> use coachtest;
+Database changed
+MariaDB [coachtest]> create table products(id int,name varchar(20),price int,expiration_date date,number int);
+Query OK, 0 rows affected (0.036 sec)
+
+MariaDB [coachtest]> insert into products set id=1,name='納豆' price=250, expiration_date='2021-04-17', number=3;)
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'price=250, expiration_date='2021-04-17', number=3' at line 1
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ')' at line 1
+MariaDB [coachtest]> INSERT INTO products SET id=1, name='納豆', price=250, expiration_date=2017-04-17, number=3;
+Query OK, 1 row affected, 1 warning (0.007 sec)
+
+MariaDB [coac      > UPDATE products SET expiration_date= '2021-04-17';
+Query OK, 1 row affected (0.005 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [coachtest]> INSERT INTO products SET id=2, name='豆腐', price=170, expiration_date=2021-04-23, number=2;
+Query OK, 1 row affected, 1 warning (0.005 sec)
+
+MariaDB [coachtest]> INSERT INTO products SET id=3, name='玉ねぎ', price=120, expiration_date=2021-04-21, number=4;
+Query OK, 1 row affected, 1 warning (0.006 sec)
+
+MariaDB [coachtest]> INSERT INTO products SET id=4, name='ニンニク', price=250, expiration_date=2021-04-09, number=5;
+Query OK, 1 row affected, 1 warning (0.005 sec)
+
+MariaDB [coachtest]> INSERT INTO products SET id=5, name='キムチ', price=300, expiration_date=2021-04-22, number=2;
+Query OK, 1 row affected, 1 warning (0.005 sec)
+
+MariaDB [coachtest]> SELECT name,expiration_date FROM products;
++----------+-----------------+
+| name     | expiration_date |
++----------+-----------------+
+| 納豆     | 2021-04-17      |
+| 豆腐     | 0000-00-00      |
+| 玉ねぎ   | 0000-00-00      |
+| ニンニク | 0000-00-00      |
+| キムチ   | 0000-00-00      |
++----------+-----------------+
+5 rows in set (0.002 sec)
+
+MariaDB [coachtest]> UPDATE products SET expiration_date= '2021-04-23' WHERE id=2;
+Query OK, 1 row affected (0.005 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [coachtest]> UPDATE products SET expiration_date= '2021-04-21' WHERE id=3;
+Query OK, 1 row affected (0.004 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [coachtest]> UPDATE products SET expiration_date= '2021-04-09' WHERE id=4;
+Query OK, 1 row affected (0.005 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [coachtest]> UPDATE products SET expiration_date= '2021-04-22' WHERE id=5;
+Query OK, 1 row affected (0.004 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [coachtest]> SELECT name,expiration_date FROM products;
++----------+-----------------+
+| name     | expiration_date |
++----------+-----------------+
+| 納豆     | 2021-04-17      |
+| 豆腐     | 2021-04-23      |
+| 玉ねぎ   | 2021-04-21      |
+| ニンニク | 2021-04-09      |
+| キムチ   | 2021-04-22      |
++----------+-----------------+
+5 rows in set (0.000 sec)
+
+MariaDB [coachtest]> SELECT * FROM products WHERE price >= 250 OR number <=3;
++------+----------+-------+-----------------+--------+
+| id   | name     | price | expiration_date | number |
++------+----------+-------+-----------------+--------+
+|    1 | 納豆     |   250 | 2021-04-17      |      3 |
+|    2 | 豆腐     |   170 | 2021-04-23      |      2 |
+|    4 | ニンニク |   250 | 2021-04-09      |      5 |
+|    5 | キムチ   |   300 | 2021-04-22      |      2 |
++------+----------+-------+-----------------+--------+
+4 rows in set (0.000 sec)
+
+MariaDB [coachtest]>
